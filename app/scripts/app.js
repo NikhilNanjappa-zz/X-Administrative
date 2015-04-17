@@ -2,20 +2,22 @@
 
 /**
  * @ngdoc overview
- * @name xAdministrativeApp
+ * @name whereIsEveryoneApp
  * @description
- * # xAdministrativeApp
+ * # whereIsEveryoneApp
  *
  * Main module of the application.
  */
-angular
-  .module('xAdministrativeApp', [
+var app = angular
+  .module('whereIsEveryoneApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap',
+    'smart-table'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,7 +29,29 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
   });
+
+// var app = angular.module('whereIsEveryoneApp', ['ngRoute']);
+
+// app.controller('RootCtrl', ['$scope', function($scope){
+//     $scope.title = "Home Page";
+// }]);
+
+// app.controller('CatsCtrl', ['$scope', function($scope){
+//     $scope.title = "Cats Page";
+// }]);
+
+// app.config(['$routeProvider', function($routeProvider){
+//     $routeProvider
+//         .when('/', {
+//             controller : 'RootCtrl',
+//             template : '<h1>{{title}}</h1>'
+//         })
+//         .when('/cats', {
+//             controller : 'CatsCtrl',
+//             template : '<h1>{{title}}</h1>'
+//         })
+//         .otherwise({
+//             redirectTo : '/'
+//         });
+// }]);

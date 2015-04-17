@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name xAdministrativeApp.controller:MainCtrl
+ * @name whereIsEveryoneApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the xAdministrativeApp
+ * Controller of the whereIsEveryoneApp
  */
-angular.module('xAdministrativeApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+app.controller('MainCtrl', function ($scope) {
+
+
+});
