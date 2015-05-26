@@ -1,0 +1,102 @@
+
+
+<div class="row employee_main_container">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+    Add an Employee
+  </button>
+  <br/>
+  <br/>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Employee details</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <!-- Employee ID -->
+            <div class="form-group">
+              <label for="employee_id">Xebia ID:</label>
+              <input class="form-control" id="employee_id" placeholder="Enter xebia ID">
+            </div>
+            <!-- Employee Name -->
+            <div class="form-group">
+              <label for="employee_name">Name:</label>
+              <input class="form-control" id="employee_name" placeholder="Enter name">
+            </div>
+            <!-- Employee Email -->
+            <div class="form-group">
+              <label for="employee_email">Xebia email:</label>
+              <input type="email" class="form-control" id="employee_email" placeholder="Enter xebia email">
+            </div>
+            <!-- Employee Phone -->
+            <div class="form-group">
+              <label for="employee_phone">Phone no:</label>
+              <input class="form-control" id="employee_phone" placeholder="Enter phone number">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addEmployee()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--     <table ng-show="edit">
+      <tbody>
+        <tr>
+          <th>Xebia ID</th>
+          <th>Name</th>
+          <th>Xebia Email</th>
+          <th>Phone no.</th> 
+          <th>action</th>
+        </tr>
+        <tr>
+          <td><input data-ng-model="editrow.employee_id" type="text" class="form-control" placeholder="Enter " /></td>
+          <td><input data-ng-model="editrow.employee_name" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.employee_email" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.employee_phone" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><button type="button" ng-click="saveItem(editrow)" class="btn btn-sm btn-success">Save</button></td>
+        </tr>
+      </tbody>
+    </table> -->
+    <br/>
+    <br/>
+    <table st-table="rowCollection" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Xebia ID</th>
+          <th>Name</th>
+          <th>Xebia Email</th>
+          <th>Phone no</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollection">
+          <td>{{row.xid}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.email}}</td>
+          <td>{{row.phone}}</td>
+<!--           <td>
+            <button type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+              <i class="fa fa-pencil">
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash">
+            </i>
+          </button>
+        </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+</div>

@@ -14,54 +14,45 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">
     <link href="css/custom.css" rel="stylesheet">
+    
+
     <!-- endbuild -->
   </head>
-  <body ng-app="whereIsEveryoneApp">
+  <body ng-app="AdministrativeApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-       <div class="area"></div><nav class="main-menu">
+       <div class="area"></div><nav class="main-menu" ng-show="loggedIn">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="/#/">
                         <i class="fa fa-cart-plus fa-2x"></i>
                         <span class="nav-text">
                           Manage Assets
                         </span>
                     </a>
-                  
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
-                        <i class="fa fa-laptop fa-2x"></i>
+                    <a href="/#/inventory">
+                        <i class="fa fa-paste fa-2x"></i>
                         <span class="nav-text">
                           Manage Inventory
                         </span>
                     </a>
-                    
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-user fa-2x"></i>
+                    <a href="/#/employee">
+                       <i class="fa fa-group fa-2x"></i>
                         <span class="nav-text">
                           Manage Employees
                         </span>
                     </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                          Manage Allotment
-                        </span>
-                    </a>
-                   
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/#/purchase">
                         <i class="fa fa-dollar fa-2x"></i>
                         <span class="nav-text">
                           Manage Purchase
@@ -72,7 +63,7 @@
 
             <ul class="logout">
                 <li>
-                   <a href="#">
+                   <a href="#/login">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Login/Logout
@@ -80,6 +71,10 @@
                     </a>
                 </li>  
             </ul>
+        </nav>
+
+        <nav class="navbar navbar-inverse" role="navigation">
+          <h4 class="navbar-text text-center" style="color:white;"> {{ page_title }}</h4>
         </nav>
 
       <div class="main_container">
@@ -99,6 +94,7 @@
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -113,11 +109,15 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/main.js"></script>
-<script src="scripts/controllers/about.js"></script>
+<script src="scripts/controllers/employee.js"></script>
+<script src="scripts/controllers/inventory.js"></script>
+<script src="scripts/controllers/purchase.js"></script>
+<script src="scripts/controllers/authentication.js"></script>
 <!-- endbuild -->
 
 <script src="js/base.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

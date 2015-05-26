@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name whereIsEveryoneApp
+ * @name AdministrativeApp
  * @description
- * # whereIsEveryoneApp
+ * # AdministrativeApp
  *
  * Main module of the application.
  */
 var app = angular
-  .module('whereIsEveryoneApp', [
+  .module('AdministrativeApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -25,33 +25,36 @@ var app = angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/employee', {
+        templateUrl: 'views/employee.html',
+        controller: 'EmployeeCtrl'
       })
-  });
+      .when('/inventory', {
+        templateUrl: 'views/inventory.html',
+        controller: 'InventoryCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginController'
+      })
+      .when('/purchase', {
+        templateUrl: 'views/purchase.html',
+        controller: 'PurchaseCtrl'
+      })
+  })
 
-// var app = angular.module('whereIsEveryoneApp', ['ngRoute']);
-
-// app.controller('RootCtrl', ['$scope', function($scope){
-//     $scope.title = "Home Page";
-// }]);
-
-// app.controller('CatsCtrl', ['$scope', function($scope){
-//     $scope.title = "Cats Page";
-// }]);
-
-// app.config(['$routeProvider', function($routeProvider){
-//     $routeProvider
-//         .when('/', {
-//             controller : 'RootCtrl',
-//             template : '<h1>{{title}}</h1>'
-//         })
-//         .when('/cats', {
-//             controller : 'CatsCtrl',
-//             template : '<h1>{{title}}</h1>'
-//         })
-//         .otherwise({
-//             redirectTo : '/'
-//         });
-// }]);
+  .run(['$rootScope', '$location', '$cookieStore', '$http',
+    function ($rootScope, $location, $cookieStore, $http) {
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+ 
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                $location.path('/login');
+            }
+        });
+    }]);

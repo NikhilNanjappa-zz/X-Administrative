@@ -1,0 +1,193 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+  Add an Inventory
+</button>
+<br/>
+<br/>
+
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a data-target="#issue">Issue</a></li>
+  <li><a data-target="#return">Return</a></li>
+  <li><a data-target="#retired">Retired</a></li>
+</ul>
+
+<!-- Issue tab -->
+<div class="tab-content">
+  <div class="tab-pane active" id="issue">
+<!--     <table ng-show="edit">
+      <tbody>
+        <tr>
+          <th>SL. No</th>
+          <th>Status</th>
+          <th>action</th>
+        </tr>
+        <tr>
+          <td><input data-ng-model="editrow.inventory_serialno" type="text" class="form-control" /></td>
+          <td>
+            <select>
+              <option data-ng-model="editrow.inventory_status">{{editrow.inventory_status}}</option>
+            </select>
+          </td>
+          <td><button type="button" ng-click="saveItem(editrow)" class="btn btn-sm btn-success">Save</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <br/> -->
+    <table st-table="rowCollection" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Asset Information</th>
+          <th>SL. No</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollection">
+          <td><h6>{{row.prod}}</h6></td>
+          <td><h5>{{row.serial_no}}</h5></td>
+<!--           <td>
+            <button type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+              <i class="fa fa-pencil">
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash">
+            </i>
+          </button>
+        </td> -->
+          <td>
+            <button type="button" ng-click="allot(row)" data-toggle="modal" data-target="#AllotmentModal" class="btn btn-sm btn-danger">
+            <i class="fa fa-user-plus">
+            </i>
+          </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Return tab -->
+  <div class="tab-pane" id="return">
+    <br/>
+    <br/>
+    <table st-table="rowCollection2" class="table table-striped">
+      <thead>
+        <tr>
+          <th>SL Np.</th>
+          <th>Asset Info</th>
+          <th>Employee ID</th>
+          <th>Date</th>
+          <th>Transaction Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollection2">
+          <td>{{row.serial_no}}</td>
+          <td>{{row.prod}}</td>
+          <td>{{row.xid}}</td>
+          <td>{{row.date}}</td>
+          <td>{{row.status}}</td>
+          <td>
+            <button type="button" ng-click="returnInventory(row)" class="btn btn-sm btn-danger">
+              <i class="fa fa-undo"></i> Return
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Retired tab -->
+  <div class="tab-pane" id="retired">
+  </div>
+  </div>
+
+<script>
+  $('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+</script>
+
+<!-- MODALS -->
+
+<div class="row inventory_main_container">
+  <!-- Add Allotment Modal -->
+  <div class="modal fade" id="AllotmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Allotment details</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <!-- Allotment Sl No. -->
+            <div class="form-group">
+              <label for="allotment_serialno">SL No: </label>
+              <h5 style="color:#5cb85c;" id="show_serialno">{{show_serialno}}</h5>
+            </div>
+            <!-- Allotment Information Select box -->
+            <label>Asset Information:</label>
+            <h5 style="color:#5cb85c;" id="show_assetinfo">{{show_assetinfo}}</h5>
+            <!-- Allotment Employee ID -->
+            <div class="form-group">
+              <label for="allotment_id">Employee Xebia ID:</label>
+              <input class="form-control" id="allotment_id" placeholder="Enter employee Xebia ID">
+            </div>
+            <div class="form-group">
+              <label>Issued Date:</label>
+              <input class="form-control" id="allotment_date" type="date" />
+            </div>
+            <!-- Allotment Transaction type Select box -->
+            <label>Transaction Type:</label><br/>
+            <select id="allotment_type">
+              <option>Issue</option>
+            </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="allotInventory()">Allot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Inventory Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Inventory details</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <!-- Asset Brand Select box -->
+            <label>Asset Information:</label><br/>
+            <select id="inventory_information">
+              <option data-ng-repeat="information in informations" value="{{information.id.$oid}}">{{information.brand + ' ' + information.equipment + ' ' + information.model + ' ' + information.capacity}}</option>
+            </select><br/><br/>
+
+            <!-- Asset Model -->
+            <div class="form-group">
+              <label for="inventory_serialno">SL No:</label>
+              <input class="form-control" id="inventory_serialno" ng-model="inventory_serialno" placeholder="Enter serial number">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addInventory()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

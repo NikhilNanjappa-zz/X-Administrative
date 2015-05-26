@@ -1,0 +1,127 @@
+<!-- <div class="jumbotron">
+  <h1>'Allo, 'Allo!</h1>
+  <p class="lead">
+    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+    Always a pleasure scaffolding your apps.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+</div> -->
+
+<div class="row purchase_main_container">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+    Add a Purchase
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Purchase details</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <!-- Purchase Information Select box -->
+            <label>Purchase Information:</label><br/>
+            <select id="purchase_information">
+              <option data-ng-repeat="information in informations" value="{{information.id.$oid}}">{{information.brand + ' ' + information.equipment + ' ' + information.model + ' ' + information.capacity}}</option>
+            </select><br/><br/>
+            <!-- Purchase date -->
+            <div class="form-group">
+              <label>Purchase Date:</label>
+              <input class="form-control" id="purchase_date" type="date" />
+            </div>
+            <!-- Purchase Cost -->
+            <div class="form-group">
+              <label for="asset_model">Cost:</label>
+              <input class="form-control" id="purchase_cost" placeholder="Enter cost">
+            </div>
+            <!-- Purchase Quantity -->
+            <div class="form-group">
+              <label for="asset_model">Quanity:</label>
+              <input class="form-control" id="purchase_quantity" placeholder="Enter quantity">
+            </div>
+            <!-- Purchase Vendor -->
+            <div class="form-group">
+              <label for="asset_model">Vendor:</label>
+              <input class="form-control" id="purhcase_vendor" placeholder="Enter vendor">
+            </div>
+            <!-- Expiry date -->
+            <div class="form-group">
+              <label>Expiry Date:</label>
+              <input class="form-control" id="expiry_date" type="date" />
+            </div>
+            <!-- Purchase Serial no -->
+            <div class="form-group">
+              <label for="asset_capacity">Serial NO:</label>
+              <input class="form-control" id="purchase_serial_no" placeholder="Enter serial number">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addPurchase()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--     <table ng-show="edit">
+      <tbody>
+        <tr>
+          <th>Brand</th>
+          <th>Equipment</th>
+          <th>Model</th>
+          <th>Capapcity</th> 
+          <th>action</th>
+        </tr>
+        <tr>
+          <td><input data-ng-model="editrow.asset_brand" type="text" class="form-control" placeholder="Enter " /></td>
+          <td><input data-ng-model="editrow.asset_equipment" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.asset_model" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.asset_capacity" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><button type="button" ng-click="saveItem(editrow)" class="btn btn-sm btn-success">Save</button></td>
+        </tr>
+      </tbody>
+    </table>
+ -->    <br/>
+    <br/>
+    <table st-table="rowCollection" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Information</th>
+          <th>Purchase date</th>
+          <th>Cost</th>
+          <th>Quantity</th>
+          <th>Vendor</th>
+          <th>Expiry Date</th>
+          <th>Serial No</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollection">
+          <td>{{row.prod}}</td>
+          <td>{{row.purchase_date}}</td>
+          <td>{{row.cost}}</td>
+          <td>{{row.quantity}}</td>
+          <td>{{row.vendor}}</td>
+          <td>{{row.expiry_date}}</td>
+          <td>{{row.serial_no}}</td>
+<!--           <td>
+            <button type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+              <i class="fa fa-pencil">
+              </i>
+            </button>
+          <td>
+            <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash">
+            </i>
+          </button>
+        </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+</div>

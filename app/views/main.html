@@ -7,7 +7,7 @@
   <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div> -->
 
-<div class="row marketing">
+<div class="row asset_main_container">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
     Add an Asset
@@ -23,28 +23,86 @@
         </div>
         <div class="modal-body">
           <form role="form">
+            <!-- Asset Brand Select box -->
+            <label>Brand:</label><br/>
+            <select id="asset_brand">
+              <option data-ng-repeat="brand in brands">{{brand}}</option>
+            </select><br/><br/>
+            <!-- Asset Equipment Select box -->
+            <label>Equipment:</label><br/>
+            <select id="asset_equipment">
+              <option data-ng-repeat="equipment in equipments">{{equipment}}</option>
+            </select><br/><br/>
+            <!-- Asset Model -->
             <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email">
+              <label for="asset_model">Model:</label>
+              <input class="form-control" id="asset_model" ng-model="asset_model" placeholder="Enter model number">
             </div>
             <div class="form-group">
-              <label for="pwd">Password:</label>
-              <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+              <label for="asset_capacity">Capacity:</label>
+              <input class="form-control" id="asset_capacity" ng-model="asset_capacity" placeholder="Enter capacity">
             </div>
-            <label for="sel1">Select list:</label>
-            <select class="form-control" id="sel1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="addAsset()">Add</button>
         </div>
       </div>
     </div>
   </div>
+
+    <table ng-show="edit">
+      <tbody>
+        <tr>
+          <th>Brand</th>
+          <th>Equipment</th>
+          <th>Model</th>
+          <th>Capapcity</th> 
+          <th>action</th>
+        </tr>
+        <tr>
+          <td><input data-ng-model="editrow.brand" type="text" class="form-control" placeholder="Enter " /></td>
+          <td><input data-ng-model="editrow.equipment" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.model" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><input data-ng-model="editrow.capacity" type="text" class="form-control" placeholder="Enter" /></td>
+          <td><button type="button" ng-click="saveItem(editrow)" class="btn btn-sm btn-success">Save</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <br/>
+    <table st-table="rowCollection" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Equipment</th>
+          <th>Model</th>
+          <th>Capacity</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollection">
+          <td>{{row.brand}}</td>
+          <td>{{row.equipment}}</td>
+          <td>{{row.model}}</td>
+          <td>{{row.capacity}}</td>
+          <td>
+            <button type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+              <i class="fa fa-pencil">
+              </i>
+            </button>
+          </td>
+          <td>
+            <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash">
+            </i>
+          </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+
 </div>
